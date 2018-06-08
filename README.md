@@ -11,6 +11,6 @@ Otherwise you can set them in application.properties file.
 ```
 java -jar target/test-task-junior-1.0.jar --spring.datasource.url=<URL> 
 					  --srping.datasource.username=<username> 
-					  -- spring.datasource.password=<password>
+					  --spring.datasource.password=<password>
 					  --server.port=<port>
 ```
