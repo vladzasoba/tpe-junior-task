@@ -14,8 +14,7 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col s1"></div>
-        <div class="col s8">
+        <div class="col s12">
             <table class="highlight">
                 <thead>
                 <tr>
@@ -35,47 +34,53 @@
                 </tbody>
             </table>
         </div>
-        <div class="col s1"></div>
     </div>
 
     <#assign tx_types=["Transfer", "Deposit", "Charge"]>
-    <form class="col s12 z-depth-2" method="post" action="/api/transactions">
-    <div class="row">
-            <div class="input-field col s2">
-                <select>
-                    <option value="" disabled selected>Choose transaction type</option>
-                    <option value="1">Transfer</option>
-                    <option value="2">Deposit</option>
-                    <option value="3">Charge</option>
-                </select>
-                <label>Transaction type</label>
-            </div>
-            <div class="input-field col s4">
-                <select>
-                    <option value="" disabled selected>Choose your account</option>
-                <#list accounts as account>
-                <option value="1">ID: ${account.accountId}</option>
-                </#list>
-                </select>
-                <label>Your account</label>
-            </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s4">
-            <input type="text" id="autocomplete-input" class="autocomplete">
-            <label for="autocomplete-input">Account Holder</label>
-        </div>
-        <div class="input-field col s2">
-            <input id="account_id" type="text" class="validate">
-            <label for="account_id">Account ID</label>
-        </div>
-        <div class="col s2">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
-            </button>
-        </div>
-    </div>
+
+    <form action="/api/accounts" method="post">
+
     </form>
+
+    <form class="col s12 z-depth-2" method="post" action="/api/transactions">
+        <div class="row">
+                <div class="input-field col s4">
+                    <select>
+                        <option value="" disabled selected>Choose transaction type</option>
+                        <option value="1">Transfer</option>
+                        <option value="2">Deposit</option>
+                        <option value="3">Charge</option>
+                    </select>
+                    <label>Transaction type</label>
+                </div>
+                <div class="input-field col s4">
+                    <select>
+                        <option value="" disabled selected>Choose your account</option>
+                    <#list accounts as account>
+                    <option value="1">ID: ${account.accountId}</option>
+                    </#list>
+                    </select>
+                    <label>Your account</label>
+                </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Account Holder</label>
+            </div>
+            <div class="input-field col s2">
+                <input id="account_id" type="text" class="validate">
+                <label for="account_id">Account ID</label>
+            </div>
+            <div class="col s2">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">Perform</i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+
     </div>
 </div>
 

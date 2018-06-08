@@ -46,16 +46,18 @@ public class AppController {
         return customerService.findAll();
     }
 
-    @RequestMapping(value = "/customers", method = RequestMethod.POST)
-    public void saveCustomer(@RequestParam("first_name") String firstname,
+    @RequestMapping(value = "/api/customers", method = RequestMethod.POST)
+    public ModelAndView saveCustomer(@RequestParam("first_name") String firstname,
                                  @RequestParam("last_name") String lastName,
                                  @RequestParam("age") String ageString) {
         customerService.save(firstname, lastName, Integer.valueOf(ageString));
+        return getCustomerPage();
     }
 
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
-    public void deleteCustomer(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/api/customers/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody String deleteCustomer(@PathVariable("id") Long id) {
         customerService.delete(id);
+        return "";
     }
 
     @RequestMapping(value = "/customers/{id}/accounts", method = RequestMethod.GET)

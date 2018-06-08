@@ -23,6 +23,7 @@
                     <th>Last name</th>
                     <th>Age</th>
                     <th> </th>
+                    <th> </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,10 @@
                 <td>
                     <a href="/customers/${customer.customerId}/accounts" class="waves-effect waves-light btn">Accounts</a>
                 </td>
+                <td>
+                    <button class="red btn waves-effect waves-light" type="delete" onclick="deleteCustomer(${customer.customerId})" name="delete">Delete
+                    </button>
+                </td>
             </tr>
             </#list>
                 </tbody>
@@ -44,7 +49,7 @@
     </div>
 
     <div class="row">
-            <form class="col s12 z-depth-2" action="/customers" method="POST">
+            <form class="col s12 z-depth-2" method="post" action="/api/customers">
                 <div class="row">
                     <p class="col s12">Add a new customer</p>
                 </div>
@@ -72,13 +77,9 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.collapsible');
-        var instances = M.Collapsible.init(elems, options);
-    });
-</script>
+<script src="/js/lib/jquery-3.3.1.js"></script>
+<script src="/js/lib/jquery.dataTables.min.js"></script>
 <script src="/js/lib/materialize.min.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

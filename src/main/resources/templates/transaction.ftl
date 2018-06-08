@@ -45,10 +45,9 @@
     });
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="/js/lib/jquery-3.3.1.js"></script>
+<script src="/js/lib/jquery.dataTables.min.js"></script>
 <script src="/js/lib/materialize.min.js"></script>
-<script src="js/main-tx.js"></script>
+<script src="/js/main-tx.js"></script>
 </body>
 </html>

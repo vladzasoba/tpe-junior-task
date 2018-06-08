@@ -6,12 +6,12 @@ values ('John', 'Doe', 39),
 
 insert into account (customer_id, amount)
 values (1, 24786.00),
-(1, 1023.00)
-(1, 13.00)
-(2, 12353.00)
-(3, 42411.00)
-(3, 130.00)
-(3, 893.00)
+(1, 1023.00),
+(1, 13.00),
+(2, 12353.00),
+(3, 42411.00),
+(3, 130.00),
+(3, 893.00),
 (4, 16540.00);
 
 insert into atransaction (tx_date, src_account_id, dst_account_id, amount, transaction_type)
