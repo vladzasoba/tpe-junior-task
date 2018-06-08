@@ -8,4 +8,6 @@ public interface AccountService {
     List<Account> findAccountsByCustomerId(Long customerId);
     List<Account> findAll();
     Account findOne(Long accountId);
+    Account save(Long customerId, Double amount);
+    Account save(Account account);
 }

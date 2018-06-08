@@ -23,15 +23,26 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction transaction = new Transaction();
         transaction.setTransacationDate(new Date());
         Account srcAccount = accountService.findOne(srcAccountId);
+        System.out.println(srcAccount);
         transaction.setSrcAccount(srcAccount);
 
-        if (txType.equalsIgnoreCase("Transfer")) {
-            transaction.setDstAccount(accountService.findOne(dstAccountId));
+        Account dstAccount = null;
+        if (dstAccountId != null) {
+            dstAccount = accountService.findOne(dstAccountId);
+        }
+        System.out.println(dstAccount);
+        if (txType.equalsIgnoreCase("Transfer") && dstAccount != null) {
+            transaction.setDstAccount(dstAccount);
             srcAccount.setAmount(srcAccount.getAmount() - amount);
+            dstAccount.setAmount(dstAccount.getAmount() + amount);
+            accountService.save(srcAccount);
+            accountService.save(dstAccount);
         } else if (txType.equalsIgnoreCase("Charge")) {
             srcAccount.setAmount(srcAccount.getAmount() - amount);
+            accountService.save(srcAccount);
         }
         srcAccount.setAmount(srcAccount.getAmount() + amount);
+        accountService.save(srcAccount);
 
         transaction.setAmount(amount);
         transaction.setTransactionType(txType);

@@ -14,10 +14,10 @@ public class Transaction {
     @Column(name = "tx_date")
     private Date transacationDate;
     @ManyToOne
-    @JoinColumn(name = "src_account_id", insertable = false, updatable = false)
+    @JoinColumn(name = "src_account_id")
     private Account srcAccount;
     @ManyToOne
-    @JoinColumn(name = "dst_account_id", insertable = false, updatable = false)
+    @JoinColumn(name = "dst_account_id")
     private Account dstAccount;
     @Column(name = "amount")
     private Double amount;

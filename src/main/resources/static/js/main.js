@@ -9,8 +9,3 @@ function deleteCustomer(customerId) {
     });
 }
 
-function addCustomer() {
-    $.post("demo_test.asp", function(data, status){
-
-    });
-}

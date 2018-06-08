@@ -25,6 +25,7 @@
                 </thead>
                 <tbody>
         <#list accounts as account>
+        <#assign customerId = account.customer.customerId>
         <tr>
             <td>${account.accountId}</td>
             <td>${account.customer.firstName} ${account.customer.lastName}</td>
@@ -36,77 +37,71 @@
         </div>
     </div>
 
-    <#assign tx_types=["Transfer", "Deposit", "Charge"]>
 
-    <form action="/api/accounts" method="post">
-
-    </form>
-
-    <form class="col s12 z-depth-2" method="post" action="/api/transactions">
         <div class="row">
+            <form class="col s21 z-depth-2" action="/api/accounts/" method="post">
+                <input type="hidden" value="${customerId}" name="customer_id"/>
+                <input type="hidden" value="0" name="amount"/>
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    Add a new account
+                </button>
+            </form>
+        </div>
+
+        <div class="row">
+            <form class="col s12 z-depth-2" method="post" action="/api/transactions">
                 <div class="input-field col s4">
-                    <select>
+                    <select name="tx_type">
                         <option value="" disabled selected>Choose transaction type</option>
-                        <option value="1">Transfer</option>
-                        <option value="2">Deposit</option>
-                        <option value="3">Charge</option>
+                        <option value="Transfer">Transfer</option>
+                        <option value="Deposit">Deposit</option>
+                        <option value="Charge">Charge</option>
                     </select>
                     <label>Transaction type</label>
                 </div>
                 <div class="input-field col s4">
-                    <select>
+                    <select name="src_account_id">
                         <option value="" disabled selected>Choose your account</option>
                     <#list accounts as account>
-                    <option value="1">ID: ${account.accountId}</option>
+                    <option value="${account.accountId}">ID: ${account.accountId}</option>
                     </#list>
                     </select>
                     <label>Your account</label>
                 </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s4">
-                <input type="text" id="autocomplete-input" class="autocomplete">
-                <label for="autocomplete-input">Account Holder</label>
-            </div>
             <div class="input-field col s2">
-                <input id="account_id" type="text" class="validate">
-                <label for="account_id">Account ID</label>
+                <input id="account_id" type="text" name="amount" class="validate">
+                <label for="account_id">Amount</label>
             </div>
-            <div class="col s2">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i class="material-icons right">Perform</i>
-                </button>
-            </div>
+                <div class="input-field col s4">
+                    <select name="dst_account">
+                        <option value="" disabled selected>Choose account owner</option>
+                    <#list customers as customer>
+                    <option value="${customer.customerId}">${customer.firstName} ${customer.lastName}</option>
+                    </#list>
+                    </select>
+                    <label>Account holder</label>
+                </div>
+                <div class="input-field col s2">
+                    <input id="account_id" type="text" class="validate" name="dst_account_id">
+                    <label for="account_id">Account ID</label>
+                </div>
+                <div class="col s2">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">Perform</i>
+                    </button>
+                </div>
         </div>
+
     </form>
+
 
 
     </div>
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="/js/lib/jquery-3.3.1.min.js"></script>
 <script src="/js/lib/materialize.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-    $(document).ready(function(){
-        $('select').formSelect();
-    });
-
-    $(document).ready(function(){
-        $.get("/api/customers", function(_data, status){
-            window.autocompleteData = {};
-            for (var i = 0; i < _data.length; i++) {
-                var attr = _data[i]["firstName"] + " " + _data[i]["lastName"] + ": " + _data[i]["customerId"];
-                autocompleteData[attr] = null;
-            }
-            console.log(autocompleteData);
-            $('input.autocomplete').autocomplete({
-                data: autocompleteData
-            });
-        });
-
-    });
-</script>
+<script src="/js/main-ac.js"></script>
 </body>
 </html>

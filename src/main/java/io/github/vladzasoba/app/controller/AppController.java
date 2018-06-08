@@ -31,6 +31,12 @@ public class AppController {
         return "hello-world";
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public @ResponseBody
+    ModelAndView getStartPage() {
+        return getCustomerPage();
+    }
+
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ModelAndView getCustomerPage() {
         Map<String, Object> params = new HashMap<>();
@@ -71,6 +77,13 @@ public class AppController {
         return new ModelAndView("customer-accounts", params);
     }
 
+    @RequestMapping(value = "/api/accounts", method = RequestMethod.POST)
+    public @ResponseBody
+    ModelAndView saveAccount(@RequestParam("customer_id") String customerId, @RequestParam("amount") String amount) {
+        accountService.save(Long.valueOf(customerId), Double.valueOf(amount));
+        return getAccountPage(Long.valueOf(customerId));
+    }
+
     @RequestMapping(value = "/transactions", method = RequestMethod.GET)
     public ModelAndView getTransactionPage() {
         Map<String, Object> params = new HashMap<>();
@@ -88,12 +101,16 @@ public class AppController {
 
     @RequestMapping(value = "/api/transactions", method = RequestMethod.POST)
     public @ResponseBody
-    Transaction performTransaction(String srcAccountId, String dstAccountId, String amount, String txType) {
-        return transactionService.save(null,
+    ModelAndView performTransaction(@RequestParam("src_account_id") String srcAccountId,
+                             @RequestParam("dst_account_id") String dstAccountId,
+                             @RequestParam("amount") String amount,
+                             @RequestParam("tx_type") String txType) {
+        transactionService.save(null,
                 Long.valueOf(srcAccountId),
-                Long.valueOf(dstAccountId),
+                dstAccountId.equals("")? null : Long.valueOf(dstAccountId),
                 Double.valueOf(amount),
                 txType);
+        return getAccountPage(accountService.findOne(Long.valueOf(srcAccountId)).getCustomer().getCustomerId());
     }
 
 }

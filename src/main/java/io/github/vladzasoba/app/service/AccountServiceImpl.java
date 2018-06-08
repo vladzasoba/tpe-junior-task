@@ -1,5 +1,6 @@
 package io.github.vladzasoba.app.service;
 
+import io.github.vladzasoba.app.model.Customer;
 import io.github.vladzasoba.app.repository.AccountRepository;
 import io.github.vladzasoba.app.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,20 @@ public class AccountServiceImpl implements AccountService {
     public Account findOne(Long accountId) {
         return accountRepository.findOne(accountId);
     }
+
+    @Override
+    public Account save(Long customerId, Double amount) {
+        Account account = new Account();
+        account.setAmount(amount);
+        Customer customer = findAccountsByCustomerId(customerId).get(0).getCustomer();
+        account.setCustomer(customer);
+        return accountRepository.save(account);
+    }
+
+    @Override
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
+
+
 }

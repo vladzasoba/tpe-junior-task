@@ -12,8 +12,10 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     Account findOne(Long accountId);
 
     @Override
-    <S extends Account> S save(S s);
+    Account save(Account account);
 
     @Override
     void delete(Account account);
+
+
 }
