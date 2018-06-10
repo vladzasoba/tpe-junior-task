@@ -14,7 +14,7 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col s12">
+        <div class="col s12 z-depth-2">
             <table class="highlight">
                 <thead>
                 <tr>

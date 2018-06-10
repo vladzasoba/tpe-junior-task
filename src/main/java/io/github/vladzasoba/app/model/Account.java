@@ -3,12 +3,13 @@ package io.github.vladzasoba.app.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "account", schema = "test")
-public class Account {
+public class Account implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "account_id")

@@ -1,4 +1,3 @@
-var dataJSON = {};
 $(document).ready(function () {
     $.get("/api/transactions", function(data, status){
         window.darr = [];

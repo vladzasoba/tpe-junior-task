@@ -24,6 +24,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                <#if accounts??>
         <#list accounts as account>
         <#assign customerId = account.customer.customerId>
         <tr>
@@ -32,6 +33,7 @@
             <td>$${account.amount}</td>
         </tr>
         </#list>
+                </#if>
                 </tbody>
             </table>
         </div>
@@ -76,7 +78,9 @@
                     <select name="dst_account">
                         <option value="" disabled selected>Choose account owner</option>
                     <#list customers as customer>
-                    <option value="${customer.customerId}">${customer.firstName} ${customer.lastName}</option>
+                    <option value="${customer.customerId}">
+                        ${customer.firstName} ${customer.lastName}
+                    </option>
                     </#list>
                     </select>
                     <label>Account holder</label>

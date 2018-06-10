@@ -32,7 +32,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> findAll() {
         List<Account> accounts = new ArrayList<>();
-        accountRepository.findAll().forEach(account -> accounts.add(account));
+        accountRepository.findAll().forEach(accounts::add);
         return accounts;
     }
 
@@ -44,15 +44,15 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account save(Long customerId, Double amount) {
         Account account = new Account();
-        account.setAmount(amount);
         Customer customer = findAccountsByCustomerId(customerId).get(0).getCustomer();
+        account.setAmount(amount);
         account.setCustomer(customer);
         return accountRepository.save(account);
     }
 
     @Override
     public Account save(Account account) {
-        return accountRepository.save(account);
+        return account != null ? accountRepository.save(account) : null;
     }
 
 

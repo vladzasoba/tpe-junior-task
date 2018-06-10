@@ -1,12 +1,13 @@
 package io.github.vladzasoba.app.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "atransaction", schema = "test")
-public class Transaction {
+public class Transaction implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "transaction_id")

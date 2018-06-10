@@ -20,8 +20,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findAll() {
-        List<Customer> customers =  new LinkedList<Customer>();
-        customerRepository.findAll().iterator().forEachRemaining(el -> customers.add(el));
+        List<Customer> customers =  new LinkedList<>();
+        customerRepository.findAll().iterator().forEachRemaining(customers::add);
         return customers;
     }
 

@@ -20,29 +20,24 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction save(String txDate, Long srcAccountId, Long dstAccountId, Double amount, String txType) {
-        Transaction transaction = new Transaction();
-        transaction.setTransacationDate(new Date());
         Account srcAccount = accountService.findOne(srcAccountId);
-        System.out.println(srcAccount);
+        Account dstAccount = (dstAccountId != null) ? accountService.findOne(dstAccountId) : null;
+        Transaction transaction = new Transaction();
+
+        transaction.setTransacationDate(new Date());
         transaction.setSrcAccount(srcAccount);
 
-        Account dstAccount = null;
-        if (dstAccountId != null) {
-            dstAccount = accountService.findOne(dstAccountId);
-        }
-        System.out.println(dstAccount);
         if (txType.equalsIgnoreCase("Transfer") && dstAccount != null) {
             transaction.setDstAccount(dstAccount);
             srcAccount.setAmount(srcAccount.getAmount() - amount);
             dstAccount.setAmount(dstAccount.getAmount() + amount);
-            accountService.save(srcAccount);
-            accountService.save(dstAccount);
         } else if (txType.equalsIgnoreCase("Charge")) {
             srcAccount.setAmount(srcAccount.getAmount() - amount);
-            accountService.save(srcAccount);
+        } else {
+            srcAccount.setAmount(srcAccount.getAmount() + amount);
         }
-        srcAccount.setAmount(srcAccount.getAmount() + amount);
         accountService.save(srcAccount);
+        accountService.save(dstAccount);
 
         transaction.setAmount(amount);
         transaction.setTransactionType(txType);
@@ -52,7 +47,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<Transaction> findAll() {
         List<Transaction> transactions = new ArrayList<>();
-        transactionRepository.findAll().iterator().forEachRemaining(transaction -> transactions.add(transaction));
+        transactionRepository.findAll().iterator().forEachRemaining(transactions::add);
         return transactions;
     }
 
