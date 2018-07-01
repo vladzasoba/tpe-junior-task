@@ -15,6 +15,7 @@
 <div class="container">
     <div class="row">
         <div class="col s12 z-depth-2">
+            <!--CUSTOMER TABLE BEGIN-->
             <table class="highlight">
                 <thead>
                 <tr>
@@ -44,11 +45,13 @@
             </#list>
                 </tbody>
             </table>
+            <!--CUSTOMER TABLE END-->
         </div>
         <div class="col s1"></div>
     </div>
 
     <div class="row">
+        <!--ADDING CUSTOMERS FORM BEGIN-->
             <form class="col s12 z-depth-2" method="post" action="/api/customers">
                 <div class="row">
                     <p class="col s12">Add a new customer</p>
@@ -73,6 +76,7 @@
                     </div>
                 </div>
             </form>
+        <!--ADDING CUSTOMERS FORM END-->
         </div>
     </div>
 </div>

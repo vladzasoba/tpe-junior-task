@@ -33,6 +33,7 @@ public class AccountServiceImpl implements AccountService {
     public List<Account> findAll() {
         List<Account> accounts = new ArrayList<>();
         accountRepository.findAll().forEach(accounts::add);
+        if (accounts.size() == 0) return null;
         return accounts;
     }
 

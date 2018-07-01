@@ -33,23 +33,28 @@
             <td>$${account.amount}</td>
         </tr>
         </#list>
+                <#else>
+                    <p>Current customer has no accounts.</p>
+                    <p>You can add one.</p>
                 </#if>
                 </tbody>
             </table>
         </div>
     </div>
 
-
+        <!--ADDING ACCOUNT FORM BEGIN-->
         <div class="row">
-            <form class="col s21 z-depth-2" action="/api/accounts/" method="post">
-                <input type="hidden" value="${customerId}" name="customer_id"/>
+            <form class="col s21 z-depth-2" action="/api/accounts" method="post">
+                <input type="hidden" value="${curCustomerId}" name="customer_id"/>
                 <input type="hidden" value="0" name="amount"/>
                 <button class="btn waves-effect waves-light" type="submit" name="action">
                     Add a new account
                 </button>
             </form>
         </div>
+        <!--ADDING ACCOUNT FORM BEGIN-->
 
+        <!--PERFORMING TRANSACTION FORM BEGIN-->
         <div class="row">
             <form class="col s12 z-depth-2" method="post" action="/api/transactions">
                 <div class="input-field col s4">
@@ -85,6 +90,7 @@
                     </select>
                     <label>Account holder</label>
                 </div>
+
                 <div class="input-field col s2">
                     <input id="account_id" type="text" class="validate" name="dst_account_id">
                     <label for="account_id">Account ID</label>
@@ -95,6 +101,7 @@
                     </button>
                 </div>
         </div>
+        <!--PERFORMING TRANSACTION FORM BEGIN-->
 
     </form>
 

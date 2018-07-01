@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/test-task-junior-1.0.jar
+web: java $JAVA_OPTS -jar target/test-task-junior-1.0.jar --spring.datasource.url=$POSTGRES.URL --srping.datasource.username=$POSTGRES.USERNAME --spring.datasource.password=$POSTGRES.PASSWORD --server.port=$PORT

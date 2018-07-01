@@ -73,6 +73,7 @@ public class AppController {
         List<Customer> customers = customerService.findAll();
         params.put("accounts", accounts);
         params.put("customers", customers);
+        params.put("curCustomerId", id);
 
         return new ModelAndView("customer-accounts", params);
     }
